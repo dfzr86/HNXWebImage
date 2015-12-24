@@ -42,7 +42,7 @@ extension UIImageView {
                     self,
                     AssociatedKeys.kWebImageKey,
                     newValue as NSString?,
-                    objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+                    objc_AssociationPolicy.OBJC_ASSOCIATION_COPY_NONATOMIC)
             }
         }
     }
