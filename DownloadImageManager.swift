@@ -13,7 +13,7 @@ class DownloadImageManager: NSObject {
     //操作缓存池
     var operationCache = [String: NSOperation]()
     //图片缓存池
-    var imageCache = [String: UIImage]()
+    var imageCache = NSCache()
     
     let queue = NSOperationQueue()
     
@@ -31,7 +31,7 @@ class DownloadImageManager: NSObject {
         }
         //判断沙盒里有没有图像
         if checkImageCache(urlString) {
-            finishBlock(image: imageCache[urlString]!)
+            finishBlock(image: imageCache.objectForKey(urlString) as! UIImage)
             return
         }
         //定义操作
@@ -64,7 +64,7 @@ class DownloadImageManager: NSObject {
     
     func checkImageCache(urlString: String) -> Bool {
         //检查内存缓存
-        if imageCache[urlString] != nil {
+        if imageCache.objectForKey(urlString) as? UIImage != nil {
             print("内存缓存")
             return true
         }
@@ -72,7 +72,7 @@ class DownloadImageManager: NSObject {
         if let image = UIImage(contentsOfFile:urlString.docuPath()) {
             print("沙盒缓存")
             //加载到内存
-            imageCache.updateValue(image, forKey: urlString)
+            imageCache.setObject(image, forKey: urlString)
             return true
         }
         return false
