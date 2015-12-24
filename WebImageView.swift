@@ -11,7 +11,8 @@ import UIKit
 class WebImageView: NSObject {}
 
 extension UIImageView {
-
+    
+    //定义私有结构体,目的是为了防止命名污染整个命名空间
     private struct AssociatedKeys{
         static let kWebImageKey = "kWebImageKey"
     }
