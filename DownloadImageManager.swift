@@ -69,7 +69,7 @@ class DownloadImageManager: NSObject {
             return true
         }
         //检查沙盒缓存
-        if let image = UIImage(contentsOfFile:filePath.docuPath(urlString)) {
+        if let image = UIImage(contentsOfFile:urlString.docuPath()) {
             print("沙盒缓存")
             //加载到内存
             imageCache.updateValue(image, forKey: urlString)

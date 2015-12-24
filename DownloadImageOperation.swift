@@ -9,14 +9,7 @@
 
 import UIKit
 
-class filePath : NSObject {
-    ///返回文件的沙盒目录
-    class func docuPath(URLString: String) -> String {
-        let documentPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).last! as NSString
-        //app.icon!.componentsSeparatedByString("/").last!  -> 根据 "/"来拆分 得到一个数组.拿到最后一个部分
-        return documentPath.stringByAppendingPathComponent(URLString.componentsSeparatedByString("/").last!)
-    }
-}
+
 
 class DownloadImageOperation: NSOperation {
     //下载图像的url
@@ -45,7 +38,8 @@ class DownloadImageOperation: NSOperation {
                 return
             }
             //将图片保存到沙盒目录
-            data!.writeToFile(filePath.docuPath(URLString!), atomically: true)
+
+            data!.writeToFile(URLString!.docuPath(), atomically: true)
             
             //判断操作是否被取消
             if self.cancelled {
